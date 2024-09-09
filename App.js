@@ -1,0 +1,60 @@
+import { StatusBar } from 'expo-status-bar';
+import { View, TextInput, StyleSheet, Text } from 'react-native';
+import ButtonPrimary from './src/components/ButtonPrimary';
+import { useEffect, useState } from 'react';
+
+
+const App = () => {
+
+  const [newTask, setNewTask] = useState("")
+  const [tasks, setTask] = useState([])
+
+  useEffect(()=>{
+    console.log(tasks)
+  },[tasks])
+
+  const handleAddTask = () =>{
+    setTask([...tasks,newTask])
+    setNewTask("")
+    }
+
+  return(
+    <View style={styles.container}>
+      <View style={styles.containerInput}>
+      <TextInput 
+      style={styles.input} 
+      placeholder='Ingrese tarea'
+      value={newTask}
+      onChangeText={(e)=> setNewTask(e)}
+      />
+      <ButtonPrimary onPress={handleAddTask} text="Agregar"/>
+      </View>
+    </View>
+  )
+}
+export default App
+
+const styles = StyleSheet.create({
+  container:{
+    marginTop:30, 
+    flex:1
+  },
+  containerInput: {
+    flexDirection:"row",
+    padding:10
+  },
+  input: {
+    borderColor: "black",
+    borderWidth:1,
+    padding:5, 
+    paddingStart:20,
+    flex:2, 
+    margin:10,
+    borderRadius:10
+  },
+  containerTitle:{
+    width:"100%",
+    height:100,
+    flexDirection:"row",
+  }
+})
